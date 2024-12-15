@@ -20,7 +20,7 @@ main(void)
 
     assert("pop passed" && 3 == stack->size(stack));
 
-    stack->destroy(stack);
+    Stack_destroy(stack);
 
     return 0;
 }

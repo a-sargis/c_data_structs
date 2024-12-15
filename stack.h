@@ -22,7 +22,6 @@ struct Stack
     int  (*peek)  (Stack* self);
     void (*print) (Stack* self);
     int  (*size)  (Stack* self);
-    void (*destroy)  (Stack* self);
 };
 
 void
@@ -74,19 +73,6 @@ size(Stack* self)
     return size;
 }
 
-void destroy(Stack* stack)
-{
-    Stack* temp;
-
-    while (stack != NULL)
-    {
-        temp = stack;
-        stack = stack->prev;
-        free(temp);
-    }
-
-}
-
 Stack*
 Stack_new(int data)
 {
@@ -100,9 +86,21 @@ Stack_new(int data)
     stack->pop      = pop;
     stack->print    = print;
     stack->size     = size;
-    stack->destroy  = destroy;
 
     return stack;
+}
+
+void Stack_destroy(Stack* stack)
+{
+    Stack* temp;
+
+    while (stack != NULL)
+    {
+        temp = stack;
+        stack = stack->prev;
+        free(temp);
+    }
+
 }
 
 #endif //STACK_H
